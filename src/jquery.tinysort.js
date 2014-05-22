@@ -139,8 +139,7 @@
 						//
 						fnPluginPrepare(oSett);
 						//
-						if (oSett.sortFunction) { // custom sort
-							iReturn = oSett.sortFunction(a,b);
+						if (oSett.sortFunction && (iReturn = oSett.sortFunction(a, b)) !== undefined) { // custom sort
 						} else if (oSett.order=='rand') { // random sort
 							iReturn = Math.random()<0.5?1:-1;
 						} else { // regular sort
