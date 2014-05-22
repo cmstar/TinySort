@@ -27,6 +27,7 @@
 	'use strict';
 	// private vars
 	var fls = !1							// minify placeholder
+		,tru = 1							// minify placeholder
 		,nll = null							// minify placeholder
 		,prsflt = parseFloat				// minify placeholder
 		,mathmn = Math.min					// minify placeholder
