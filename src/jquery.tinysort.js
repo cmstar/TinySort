@@ -93,6 +93,8 @@
 			,ignoreDashes:fls		// ignores dashes when looking for numerals
 
 			,sortFunction: nll		// override the default sort function
+
+			,localeCompare: fls		// use String.prototype.localeCompare to compare strings
 		}
 	};
 	$.fn.extend({
@@ -146,6 +148,7 @@
 								// prepare sort elements
 								,sA = fnPrepareSortElement(oSett,a.s[iCriteria])
 								,sB = fnPrepareSortElement(oSett,b.s[iCriteria])
+								,bAllNum = fls
 							;
 							// maybe force Strings
 							if (!oSett.forceStrings) {
@@ -159,10 +162,16 @@
 										bNumeric = !fls;
 										sA = prsflt(aAnum[0]);
 										sB = prsflt(aBnum[0]);
+										bAllNum = tru;
 									}
 								}
 							}
-							iReturn = oPoint.iAsc*(sA<sB?-1:(sA>sB?1:0));
+
+							if (bAllNum || !oSett.localeCompare) {
+								iReturn = oPoint.iAsc*(sA<sB?-1:(sA>sB?1:0));
+							} else {
+								iReturn = oPoint.iAsc*sA.localeCompare(sB);
+							}
 						}
 
 						loop(aPluginSort,function(fn){
